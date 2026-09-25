@@ -12,6 +12,12 @@ public class App {
         System.out.println("=== CampusRide ===");
         fleet.getVehicles().forEach(System.out::println);
         runTeamFeatures(fleet, rentalService, report);
+
+        rentalService.rentVehicle("B1");
+        System.out.println("B1 available after rent = "
+                + fleet.findById("B1").isAvailable());
+        rentalService.returnVehicle("B1");
+
     }
 
     private static void runTeamFeatures(Fleet fleet,
@@ -19,4 +25,6 @@ public class App {
                                         FleetReport report) {
         System.out.println("TEAM FEATURES NOT YET INTEGRATED");
     }
+
+
 }
