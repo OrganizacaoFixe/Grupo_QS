@@ -1,5 +1,6 @@
 package pt.upt.quality.campusride;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FleetReport {
@@ -10,11 +11,21 @@ public class FleetReport {
     }
 
     public List<String> availableVehicleIds() {
-        throw new UnsupportedOperationException("availableVehicleIds not implemented");
+        List<String> availableIds = new ArrayList<>();
+        for (Vehicle vehicle : fleet.getVehicles()) {
+            if (vehicle.isAvailable()) {
+                availableIds.add(vehicle.getId());
+            }
+        }
+        return availableIds;
     }
 
     public double estimateTotalPrice(int minutes) {
-        throw new UnsupportedOperationException("estimateTotalPrice not implemented");
+        double priceTotal = 0.0;
+        for (Vehicle vehicle : fleet.getVehicles()) {
+            priceTotal += vehicle.calculatePrice(minutes);
+        }
+        return priceTotal;
     }
 
     public int countAvailableVehicles() {
