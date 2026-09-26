@@ -16,4 +16,14 @@ public class FleetReport {
     public double estimateTotalPrice(int minutes) {
         throw new UnsupportedOperationException("estimateTotalPrice not implemented");
     }
+
+    public int countAvailableVehicles() {
+        int count = 0;
+        for (Vehicle vehicle : fleet.getVehicles()) {
+            if (vehicle.isAvailable()) {
+                count = count + 1;
+            }
+        }
+        return count;
+    }
 }
