@@ -2,6 +2,9 @@ package pt.upt.quality.campusride;
 
 public class Scooter extends Vehicle implements Electric {
     private int batteryLevel;
+    public static final double unlockFee = 1.00;
+    public static final double feeUntil30 = 0.15;
+    public static final double feeOver30 = 0.20;
 
     public Scooter(String id, int batteryLevel) {
         super(id);
@@ -25,7 +28,17 @@ public class Scooter extends Vehicle implements Electric {
     @Override
     public double calculatePrice(int minutes) {
         validateMinutes(minutes);
-        return 1.00 + minutes * 0.15;
+        double n = 0.0;
+
+        if (minutes > 30) {
+            n = 30.0 * feeUntil30;
+            minutes -= 30;
+        } else {
+            n = minutes * feeUntil30;
+            minutes = 0;
+        }
+
+        return unlockFee + n + minutes * feeOver30;
     }
 
     private void validateBattery(int batteryLevel) {
